@@ -1,0 +1,22 @@
+{
+  "name": "expense-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/figlet": "^1.5.8",
+    "@types/node": "^22.5.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "figlet": "^1.7.0"
+  }
+}
