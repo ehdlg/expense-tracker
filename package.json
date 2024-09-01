@@ -2,18 +2,31 @@
   "name": "expense-tracker",
   "version": "1.0.0",
   "description": "",
+  "bin": {
+    "expense-tracker": "./dist/index.js"
+  },
   "main": "index.js",
   "scripts": {
     "start": "pnpm exec ts-node src/index.ts"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "cli",
+    "expenses",
+    "npmtool"
+  ],
+  "repository": "https://github.com/ehdlg/expense-tracker",
+  "homepage": "https://github.com/ehdlg/expense-tracker#readme",
+  "author": "Enrique Hidalgo",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^9.9.1",
     "@types/figlet": "^1.5.8",
     "@types/node": "^22.5.1",
+    "eslint": "^9.9.1",
+    "globals": "^15.9.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.3.0"
   },
   "dependencies": {
     "commander": "^12.1.0",
