@@ -12,6 +12,7 @@ export const checkDBExists = async () => {
 };
 
 export const getData = async (): Promise<Expense[]> => {
+  await checkDBExists();
   const rawData = await fs.readFile(DB_FILE_PATH, 'utf-8');
   const data = JSON.parse(rawData);
 
