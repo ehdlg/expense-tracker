@@ -6,7 +6,7 @@ export const checkDBExists = async () => {
   await fs.mkdir(DB_DIR_PATH, { recursive: true });
   try {
     await fs.access(DB_FILE_PATH);
-  } catch (error) {
+  } catch (_error) {
     await fs.writeFile(DB_FILE_PATH, JSON.stringify([]), { flag: 'a+' });
   }
 };
