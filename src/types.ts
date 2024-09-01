@@ -4,3 +4,5 @@ export type Expense = {
   amount: number;
   date: Date;
 };
+
+export type Options = Pick<Expense, 'amount' | 'description'>;
