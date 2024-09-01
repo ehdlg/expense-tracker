@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "commander": "^12.1.0",
-    "figlet": "^1.7.0"
+    "figlet": "^1.7.0",
+    "table": "^6.8.2"
   }
 }
