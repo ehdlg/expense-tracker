@@ -9,3 +9,10 @@ export const checkDBExists = async () => {
     await fs.writeFile(DB_FILE_PATH, JSON.stringify([]), { flag: 'a+' });
   }
 };
+
+export const getData = async () => {
+  const rawData = await fs.readFile(DB_FILE_PATH, 'utf-8');
+  const data = JSON.parse(rawData);
+
+  return data;
+};
