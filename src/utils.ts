@@ -1,8 +1,5 @@
 import fs from 'node:fs/promises';
-import path from 'node:path';
-
-const DB_DIR_PATH = path.resolve(__dirname, 'db');
-const DB_FILE_PATH = path.resolve(DB_DIR_PATH, 'data.json');
+import { DB_DIR_PATH, DB_FILE_PATH } from './constants';
 
 export const checkDBExists = async () => {
   await fs.mkdir(DB_DIR_PATH, { recursive: true });
