@@ -1,7 +1,7 @@
 import { Command } from 'commander';
 import figlet from 'figlet';
-import { addExpense, listExpenses } from './actions';
-import { myParseFloat, validateString } from './validation';
+import { addExpense, deleteExpense, listExpenses } from './actions';
+import { myParseFloat, validateId, validateString } from './validation';
 
 const program = new Command();
 
@@ -14,11 +14,17 @@ program
   .description('Add a new expense')
   .requiredOption(
     '-d, --description <description>',
-    'The expense must have a description',
+    'A description must be provided',
     validateString
   )
-  .requiredOption('-a, --amount <amount>', 'The expense must have an amount', myParseFloat)
+  .requiredOption('-a, --amount <amount>', 'An amount must be provided', myParseFloat)
   .action(addExpense);
+
+program
+  .command('delete')
+  .description('Delete a saved expense')
+  .requiredOption('--id <id>', 'Expense ID must be provided', validateId)
+  .action(deleteExpense);
 
 program.command('list').description('List all the expenses').action(listExpenses);
 

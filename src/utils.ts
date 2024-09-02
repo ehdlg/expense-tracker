@@ -26,3 +26,9 @@ export const saveData = async (newData: Expense[]) => {
     console.error('There was an error trying to save the new data', error);
   }
 };
+
+export const getId = (data: Expense[]) => {
+  if (data.length === 0) return 1;
+
+  return data[data.length - 1].id + 1;
+};
