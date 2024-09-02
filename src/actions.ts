@@ -24,19 +24,17 @@ export const deleteExpense = async (options: DeleteExpense) => {
 
   if (data.length === 0) return emptyData();
 
-  for (const [index, expense] of Object.entries(data)) {
-    if (+expense.id === id) {
-      const newData = [...data.slice(0, +index), ...data.slice(+index + 1)];
+  const index = data.findIndex((expense) => +expense.id === id);
 
-      await saveData(newData);
+  if (index === -1) return expenseNotFound(id);
 
-      console.log('Expense deleted successfully');
+  const newData = [...data.slice(0, +index), ...data.slice(+index + 1)];
 
-      process.exit(0);
-    }
-  }
+  await saveData(newData);
 
-  return expenseNotFound(id);
+  console.log('Expense deleted successfully');
+
+  process.exit(0);
 };
 
 export const listExpenses = async () => {
