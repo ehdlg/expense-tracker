@@ -1,9 +1,11 @@
 import { InvalidArgumentError } from 'commander';
 
-export const myParseFloat = (value: string) => {
+export const validateAmount = (value: string) => {
   const parsedValue = parseFloat(value);
 
   if (isNaN(parsedValue)) throw new InvalidArgumentError('Not a number');
+
+  if (parsedValue <= 0) throw new InvalidArgumentError('Amount must be a number greater than 0');
 
   return parsedValue;
 };
