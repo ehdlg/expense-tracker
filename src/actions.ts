@@ -1,6 +1,6 @@
 import { formatDate, getData, getId, saveData } from './utils';
 import { getBorderCharacters, table } from 'table';
-import type { NewExpense, Expense, DeleteExpense } from './types';
+import type { NewExpense, Expense, DeleteExpense, UpdateExpense } from './types';
 import { emptyData, expenseNotFound } from './errors';
 
 export const addExpense = async (options: NewExpense) => {
@@ -33,6 +33,30 @@ export const deleteExpense = async (options: DeleteExpense) => {
   await saveData(newData);
 
   console.log('Expense deleted successfully');
+
+  process.exit(0);
+};
+
+export const updateExpense = async (options: UpdateExpense) => {
+  const { id, amount, description, date } = options;
+  const data = await getData();
+
+  if (data.length === 0) return emptyData();
+
+  const index = data.findIndex((expense) => +expense.id === id);
+
+  if (index === -1) return expenseNotFound(id);
+
+  data[index] = {
+    ...data[index],
+    amount: amount ?? data[index].amount,
+    date: date ?? data[index].date,
+    description: description ?? data[index].description,
+  };
+
+  await saveData(data);
+
+  console.log(`Expense ${id} updated successfully`);
 
   process.exit(0);
 };
