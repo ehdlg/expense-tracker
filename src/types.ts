@@ -10,3 +10,8 @@ export type NewExpense = Pick<Expense, 'amount' | 'description'>;
 export type UpdateExpense = Partial<Expense> & Pick<Expense, 'id'>;
 
 export type DeleteExpense = Pick<Expense, 'id'>;
+
+export type SummarizeOptions = {
+  month?: number;
+  year?: number;
+};
