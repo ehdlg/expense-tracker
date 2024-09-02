@@ -23,3 +23,11 @@ export const validateId = (value: string) => {
 
   return parsedValue;
 };
+
+export const validateDate = (value: string) => {
+  const date = new Date(value);
+
+  if (isNaN(date.getTime())) throw new InvalidArgumentError('Invalid date');
+
+  return date;
+};
