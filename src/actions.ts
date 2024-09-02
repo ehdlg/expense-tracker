@@ -89,9 +89,9 @@ export const summarizeExpenses = async () => {
   const data = await getData();
   const initialValue = 0;
 
-  if (data.length === 0) return initialValue;
-
   const total = data.reduce((acc, expense) => acc + expense.amount, initialValue);
 
   console.log(`Total expenses: ${total}`);
+
+  process.exit(0);
 };
