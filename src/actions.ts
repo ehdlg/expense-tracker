@@ -1,4 +1,4 @@
-import { getData, saveData } from './utils';
+import { formatDate, getData, getId, saveData } from './utils';
 import { getBorderCharacters, table } from 'table';
 import type { Options, Expense } from './types';
 import { emptyData, expenseNotFound } from './errors';
@@ -7,8 +7,8 @@ export const addExpense = async (options: Options) => {
   const data = await getData();
   const newExpense: Expense = {
     ...options,
-    id: data.length + 1,
-    date: new Date(),
+    id: getId(data),
+    date: new Date(formatDate(new Date())),
   };
 
   data.push(newExpense);
