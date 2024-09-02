@@ -16,6 +16,8 @@ export const addExpense = async (options: NewExpense) => {
   await saveData(data);
 
   console.log(`Expense added suffesfully (ID: ${newExpense.id})`);
+
+  process.exit(0);
 };
 
 export const deleteExpense = async (options: DeleteExpense) => {
@@ -79,6 +81,8 @@ export const listExpenses = async () => {
       border: getBorderCharacters('norc'),
     })
   );
+
+  process.exit(0);
 };
 
 export const summarizeExpenses = async () => {
