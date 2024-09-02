@@ -33,8 +33,9 @@ export const getId = (data: Expense[]) => {
   return data[data.length - 1].id + 1;
 };
 
-export const formatDate = (date: Date) => {
-  const [formatedDate] = date.toISOString().split('T');
+export const formatDate = (date: string) => {
+  const [formatedDate] = date.split('T');
 
+  return formatedDate;
   return formatedDate;
 };

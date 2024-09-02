@@ -8,7 +8,7 @@ export const addExpense = async (options: NewExpense) => {
   const newExpense: Expense = {
     ...options,
     id: getId(data),
-    date: new Date(formatDate(new Date())),
+    date: formatDate(new Date().toISOString()),
   };
 
   data.push(newExpense);
@@ -69,7 +69,7 @@ export const listExpenses = async () => {
   const expenses = [
     ['ID', 'Description', 'Amount', 'Date'],
     ...data.map((expense) => {
-      return [expense.id, expense.description, expense.amount, expense.date];
+      return [expense.id, expense.description, expense.amount, formatDate(expense.date)];
     }),
   ];
 
@@ -79,4 +79,15 @@ export const listExpenses = async () => {
       border: getBorderCharacters('norc'),
     })
   );
+};
+
+export const summarizeExpenses = async () => {
+  const data = await getData();
+  const initialValue = 0;
+
+  if (data.length === 0) return initialValue;
+
+  const total = data.reduce((acc, expense) => acc + expense.amount, initialValue);
+
+  console.log(`Total expenses: ${total}`);
 };

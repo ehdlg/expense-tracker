@@ -2,7 +2,7 @@ export type Expense = {
   id: number;
   description: string;
   amount: number;
-  date: Date;
+  date: string;
 };
 
 export type NewExpense = Pick<Expense, 'amount' | 'description'>;
