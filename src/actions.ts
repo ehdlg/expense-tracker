@@ -1,6 +1,7 @@
 import { getData, saveData } from './utils';
 import { getBorderCharacters, table } from 'table';
 import type { Options, Expense } from './types';
+import { emptyData, expenseNotFound } from './errors';
 
 export const addExpense = async (options: Options) => {
   const data = await getData();
@@ -17,14 +18,31 @@ export const addExpense = async (options: Options) => {
   console.log(`Expense added suffesfully (ID: ${newExpense.id})`);
 };
 
+export const deleteExpense = async (options: Pick<Expense, 'id'>) => {
+  const { id } = options;
+  const data = await getData();
+
+  if (data.length === 0) return emptyData();
+
+  for (const [index, expense] of Object.entries(data)) {
+    if (+expense.id === id) {
+      const newData = [...data.slice(0, +index), ...data.slice(+index + 1)];
+
+      await saveData(newData);
+
+      console.log('Expense deleted successfully');
+
+      process.exit(0);
+    }
+  }
+
+  return expenseNotFound(id);
+};
+
 export const listExpenses = async () => {
   const data = await getData();
 
-  if (data.length == 0) {
-    console.log('There are no expenses yet. Use add [options] to add a new expense.');
-
-    process.exit(0);
-  }
+  if (data.length === 0) return emptyData();
 
   const expenses = [
     ['ID', 'Description', 'Amount', 'Date'],
