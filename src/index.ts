@@ -1,6 +1,12 @@
 import { Command } from 'commander';
 import figlet from 'figlet';
-import { addExpense, deleteExpense, listExpenses, updateExpense } from './actions';
+import {
+  addExpense,
+  deleteExpense,
+  listExpenses,
+  summarizeExpenses,
+  updateExpense,
+} from './actions';
 import { validateAmount, validateDate, validateId, validateString } from './validation';
 
 const program = new Command();
@@ -36,6 +42,12 @@ program
   .action(updateExpense);
 
 program.command('list').description('List all the expenses').action(listExpenses);
+
+program
+  .command('summary')
+  .description('Gives information about the global expenses or the expenes of a specific month')
+  .option('-m, --month [month]', 'Month of the current year')
+  .action(summarizeExpenses);
 
 if (!process.argv.slice(2).length) {
   console.log(figlet.textSync('Expense tracker'));
