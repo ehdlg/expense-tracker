@@ -15,3 +15,11 @@ export const validateString = (value: string) => {
 
   return newString;
 };
+
+export const validateId = (value: string) => {
+  const parsedValue = parseInt(value);
+
+  if (isNaN(parsedValue) || parsedValue < 0) throw new InvalidArgumentError('Invalid ID');
+
+  return parsedValue;
+};
