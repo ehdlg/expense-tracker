@@ -1,9 +1,9 @@
 import { formatDate, getData, getId, saveData } from './utils';
 import { getBorderCharacters, table } from 'table';
-import type { Options, Expense } from './types';
+import type { NewExpense, Expense, DeleteExpense } from './types';
 import { emptyData, expenseNotFound } from './errors';
 
-export const addExpense = async (options: Options) => {
+export const addExpense = async (options: NewExpense) => {
   const data = await getData();
   const newExpense: Expense = {
     ...options,
@@ -18,7 +18,7 @@ export const addExpense = async (options: Options) => {
   console.log(`Expense added suffesfully (ID: ${newExpense.id})`);
 };
 
-export const deleteExpense = async (options: Pick<Expense, 'id'>) => {
+export const deleteExpense = async (options: DeleteExpense) => {
   const { id } = options;
   const data = await getData();
 

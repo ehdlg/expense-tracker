@@ -5,4 +5,8 @@ export type Expense = {
   date: Date;
 };
 
-export type Options = Pick<Expense, 'amount' | 'description'>;
+export type NewExpense = Pick<Expense, 'amount' | 'description'>;
+
+export type UpdateExpense = Partial<Expense> & Pick<Expense, 'id'>;
+
+export type DeleteExpense = Pick<Expense, 'id'>;
