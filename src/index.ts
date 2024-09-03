@@ -7,7 +7,13 @@ import {
   summarizeExpenses,
   updateExpense,
 } from './actions';
-import { validateAmount, validateDate, validateId, validateString } from './validation';
+import {
+  validateAmount,
+  validateDate,
+  validateId,
+  validateInt,
+  validateString,
+} from './validation';
 
 const program = new Command();
 
@@ -18,24 +24,20 @@ program
 program
   .command('add')
   .description('Add a new expense')
-  .requiredOption(
-    '-d, --description <description>',
-    'A description must be provided',
-    validateString
-  )
-  .requiredOption('-a, --amount <amount>', 'An amount must be provided', validateAmount)
+  .requiredOption('-d, --description <description>', 'Expense description', validateString)
+  .requiredOption('-a, --amount <amount>', 'Expense amount', validateAmount)
   .action(addExpense);
 
 program
   .command('delete')
-  .description('Delete a saved expense')
-  .requiredOption('--id <id>', 'Expense ID must be provided', validateId)
+  .description('Delete an existing expense')
+  .requiredOption('--id <id>', 'Expense ID', validateId)
   .action(deleteExpense);
 
 program
   .command('update')
   .description('Update an existing expense')
-  .requiredOption('--id <id>', 'Expense ID must be provided', validateId)
+  .requiredOption('--id <id>', 'Expense ID', validateId)
   .option('-a, --amount [amount]', 'New expense amount', validateAmount)
   .option('-d, --description [description]', 'New expense description', validateString)
   .option('--date [date]', 'New expense date', validateDate)
@@ -45,8 +47,11 @@ program.command('list').description('List all the expenses').action(listExpenses
 
 program
   .command('summary')
-  .description('Gives information about the global expenses or the expenes of a specific month')
-  .option('-m, --month [month]', 'Month of the current year')
+  .description(
+    'Gives information about the global expenses or the expenses of a specific month and/or year'
+  )
+  .option('-m, --month [month]', 'Month to filter the expenses', validateInt)
+  .option('-y, --year [year]', 'Year to filter the expenses', validateInt)
   .action(summarizeExpenses);
 
 if (!process.argv.slice(2).length) {
