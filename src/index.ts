@@ -20,7 +20,7 @@ import {
 const program = new Command();
 
 program
-  .version('0.0.1', '-v, --version', 'output the current version')
+  .version('1.0.1', '-v, --version', 'output the current version')
   .description('A CLI tool to manage your expenses');
 
 program
