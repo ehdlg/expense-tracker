@@ -37,5 +37,4 @@ export const formatDate = (date: string) => {
   const [formatedDate] = date.split('T');
 
   return formatedDate;
-  return formatedDate;
 };
