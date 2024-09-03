@@ -19,9 +19,9 @@ export const validateString = (value: string) => {
 };
 
 export const validateId = (value: string) => {
-  const parsedValue = parseInt(value);
+  const parsedValue = validateInt(value);
 
-  if (isNaN(parsedValue) || parsedValue < 0) throw new InvalidArgumentError('Invalid ID');
+  if (parsedValue < 0) throw new InvalidArgumentError('Invalid ID');
 
   return parsedValue;
 };
@@ -32,4 +32,12 @@ export const validateDate = (value: string) => {
   if (isNaN(date.getTime())) throw new InvalidArgumentError('Invalid date');
 
   return date;
+};
+
+export const validateInt = (value: string) => {
+  const parsedValue = parseInt(value);
+
+  if (isNaN(parsedValue)) throw new InvalidArgumentError('Not a number');
+
+  return parsedValue;
 };
