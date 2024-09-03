@@ -1,7 +1,8 @@
 import { formatDate, getData, getId, saveData } from './utils';
 import { getBorderCharacters, table } from 'table';
-import type { NewExpense, Expense, DeleteExpense, UpdateExpense } from './types';
+import type { NewExpense, Expense, DeleteExpense, UpdateExpense, SummarizeOptions } from './types';
 import { emptyData, expenseNotFound } from './errors';
+import { DEFAULT_YEAR, Month } from './constants';
 
 export const addExpense = async (options: NewExpense) => {
   const data = await getData();
@@ -85,13 +86,35 @@ export const listExpenses = async () => {
   process.exit(0);
 };
 
-export const summarizeExpenses = async () => {
-  const data = await getData();
-  const initialValue = 0;
+export const summarizeExpenses = async (options: SummarizeOptions) => {
+  const { month, year } = options;
+  let data = await getData();
+  let filterYear: number | null = null;
+  let filterMonth: number | null = null;
 
+  if (month != null || year != null) {
+    filterYear = year ?? DEFAULT_YEAR;
+    filterMonth = month ?? null;
+
+    data = data.filter((expense) => {
+      const expenseDate = new Date(expense.date);
+      const expenseMonth = expenseDate.getMonth() + 1;
+      const expenseYear = +expenseDate.getFullYear();
+
+      return (null === filterMonth || expenseMonth === filterMonth) && expenseYear === filterYear;
+    });
+  }
+
+  const initialValue = 0;
   const total = data.reduce((acc, expense) => acc + expense.amount, initialValue);
 
-  console.log(`Total expenses: ${total}`);
+  console.log(
+    `Total expenses: $${total}${
+      filterYear != null
+        ? ` for ${filterMonth != null ? `${Month[filterMonth]}, ` : ''}${filterYear}`
+        : ''
+    }`
+  );
 
   process.exit(0);
 };
