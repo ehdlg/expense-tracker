@@ -1,5 +1,5 @@
 {
-  "name": "expense-tracker",
+  "name": "@ehdlg/expense-tracker",
   "version": "1.0.0",
   "description": "",
   "bin": {
@@ -7,7 +7,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "pnpm exec ts-node src/index.ts"
+    "start": "pnpm exec ts-node src/index.ts",
+    "build": "pnpm exec tsc"
   },
   "keywords": [
     "cli",
