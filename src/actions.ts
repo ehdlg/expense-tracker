@@ -71,7 +71,7 @@ export const listExpenses = async () => {
   const expenses = [
     ['ID', 'Description', 'Amount', 'Date'],
     ...data.map((expense) => {
-      return [expense.id, expense.description, expense.amount, formatDate(expense.date)];
+      return [expense.id, expense.description, `$${expense.amount}`, formatDate(expense.date)];
     }),
   ];
 
